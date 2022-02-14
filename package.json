@@ -2,9 +2,14 @@
   "name": "getir_assignment",
   "version": "1.0.0",
   "description": "Getir Assignment Challenge",
-  "main": "index.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest test",
+    "dev": "npm run build && nodemon src/server.js",
+    "lint": "eslint src",
+    "build": "babel src/server.js -d dist",
+    "start": "npm run build && node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +22,18 @@
   },
   "homepage": "https://github.com/abhivashistha5/getir_assignment#readme",
   "dependencies": {
-    "express": "4.17.2"
+    "dotenv": "16.0.0",
+    "express": "4.17.2",
+    "morgan": "^1.10.0",
+    "tracer": "^1.1.5"
   },
   "devDependencies": {
-    "eslint": "^8.9.0",
+    "@jest/globals": "^27.5.1",
+    "eslint": "8.9.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.25.4",
-    "jest": "27.5.1"
+    "jest": "27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

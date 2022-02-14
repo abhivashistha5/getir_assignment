@@ -11,5 +11,10 @@
         "sourceType": "module"
     },
     "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "import/extensions": 0
     }
 }
