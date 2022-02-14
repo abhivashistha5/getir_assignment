@@ -1,0 +1,28 @@
+{
+  "name": "getir_assignment",
+  "version": "1.0.0",
+  "description": "Getir Assignment Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhivashistha5/getir_assignment.git"
+  },
+  "author": "Abhijeet Vashistha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhivashistha5/getir_assignment/issues"
+  },
+  "homepage": "https://github.com/abhivashistha5/getir_assignment#readme",
+  "dependencies": {
+    "express": "4.17.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.25.4",
+    "jest": "27.5.1"
+  }
+}
