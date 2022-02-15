@@ -9,4 +9,7 @@ export default {
     logging: {
         level: process.env.LOG_LEVEL || 'debug',
     },
+    database: {
+        connectionUri: process.env.MONGO_CONNECTION_URI,
+    },
 };
