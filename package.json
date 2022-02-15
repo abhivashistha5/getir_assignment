@@ -26,27 +26,29 @@
   "dependencies": {
     "dotenv": "16.0.0",
     "express": "4.17.2",
-    "morgan": "^1.10.0",
-    "tracer": "^1.1.5"
+    "mongoose": "6.2.1",
+    "morgan": "1.10.0",
+    "tracer": "1.1.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
-    "@babel/node": "^7.16.8",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-stage-1": "^7.8.3",
-    "@babel/register": "^7.17.0",
-    "@babel/runtime": "^7.17.2",
-    "@jest/globals": "^27.5.1",
-    "babel-jest": "^27.5.1",
-    "babel-loader": "^8.2.3",
-    "babel-runtime": "^6.26.0",
+    "@babel/cli": "7.17.0",
+    "@babel/core": "7.17.2",
+    "@babel/node": "7.16.8",
+    "@babel/plugin-transform-runtime": "7.17.0",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-stage-1": "7.8.3",
+    "@babel/register": "7.17.0",
+    "@babel/runtime": "7.17.2",
+    "@jest/globals": "27.5.1",
+    "@shelf/jest-mongodb": "2.2.0",
+    "babel-jest": "27.5.1",
+    "babel-loader": "8.2.3",
+    "babel-runtime": "6.26.0",
     "eslint": "8.9.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.25.4",
     "jest": "27.5.1",
-    "nodemon": "^2.0.15",
-    "supertest": "^6.2.2"
+    "nodemon": "2.0.15",
+    "supertest": "6.2.2"
   }
 }
