@@ -1,6 +1,13 @@
 # IDE configs
 .vscode
 
+# config
+.env
+
+# build
+dist
+coverage
+
 # modules
 node_modules
 

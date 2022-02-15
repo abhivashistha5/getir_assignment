@@ -2,9 +2,15 @@
   "name": "getir_assignment",
   "version": "1.0.0",
   "description": "Getir Assignment Challenge",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest test",
+    "test:cov": "npm run test -- --coverage --runInBand",
+    "dev": "nodemon --watch src --exec npm run start",
+    "lint": "eslint src",
+    "build": "babel -d ./dist ./src",
+    "start": "npm run clean && npm run build && node dist/server.js",
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -17,12 +23,29 @@
   },
   "homepage": "https://github.com/abhivashistha5/getir_assignment#readme",
   "dependencies": {
-    "express": "4.17.2"
+    "dotenv": "16.0.0",
+    "express": "4.17.2",
+    "morgan": "^1.10.0",
+    "tracer": "^1.1.5"
   },
   "devDependencies": {
-    "eslint": "^8.9.0",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-stage-1": "^7.8.3",
+    "@babel/register": "^7.17.0",
+    "@babel/runtime": "^7.17.2",
+    "@jest/globals": "^27.5.1",
+    "babel-jest": "^27.5.1",
+    "babel-loader": "^8.2.3",
+    "babel-runtime": "^6.26.0",
+    "eslint": "8.9.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.25.4",
-    "jest": "27.5.1"
+    "jest": "27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
