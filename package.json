@@ -4,8 +4,9 @@
   "description": "Getir Assignment Challenge",
   "main": "src/server.js",
   "scripts": {
-    "test": "jest test",
-    "test:cov": "npm run test -- --coverage --runInBand",
+    "test": "jest test --runInBand",
+    "test:watch": "jest test --runInBand --watch",
+    "test:cov": "npm run test -- --coverage --runInBand --silent=true",
     "dev": "nodemon --watch src --exec npm run serve",
     "lint": "eslint src",
     "build": "babel -d ./dist ./src",
@@ -26,6 +27,7 @@
   "dependencies": {
     "dotenv": "16.0.0",
     "express": "4.17.2",
+    "moment": "2.29.1",
     "mongoose": "6.2.1",
     "morgan": "1.10.0",
     "tracer": "1.1.5"

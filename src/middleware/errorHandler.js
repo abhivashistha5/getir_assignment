@@ -1,3 +1,4 @@
+import { responseMessage } from '../common/responseMessage';
 import { httpStatus, responseCode } from '../common/statusCode';
 import { responseBuilder } from '../lib/util';
 
@@ -9,7 +10,7 @@ export default (err, req, res, next) => {
             err.response
             || responseBuilder(
                 responseCode.SERVER_ERROR,
-                'Oops! Something went wrong.',
+                responseMessage.SOMETHING_WENT_WRONG,
                 [],
             ),
         );

@@ -7,7 +7,7 @@ export default {
         port: process.env.PORT || 8080,
     },
     logging: {
-        level: process.env.LOG_LEVEL || 'debug',
+        level: process.env.LOG_LEVEL,
     },
     database: {
         connectionUri: process.env.MONGO_CONNECTION_URI,

@@ -3,6 +3,7 @@
 
 # config
 .env
+globalConfig.json
 
 # build
 dist

@@ -60,4 +60,5 @@ export const responseCode = {
     SUCCESS: 0,
     SERVER_ERROR: 1,
     NOT_FOUND: 2,
+    DB_ERROR: 3,
 };
