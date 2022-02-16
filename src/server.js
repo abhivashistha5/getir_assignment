@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import config from './config';
 import logger from './lib/logger';
-import healthRoute from './route/health';
+import healthRoute from './route/health/health.controller';
 import unknownRoute from './middleware/unknownRoute';
 import errorHandler from './middleware/errorHandler';
 
