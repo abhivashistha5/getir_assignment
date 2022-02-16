@@ -1,12 +1,13 @@
 import { Router } from 'express';
+import { httpStatus } from '../../common/statusCode';
 
 const router = Router();
 
 /**
- * Health check / ping route
+ * Api GET /ping
  */
 router.get('/ping', (req, res) => {
-    res.status(200).end('pong');
+    res.status(httpStatus.OK).end('pong');
 });
 
 export default router;
