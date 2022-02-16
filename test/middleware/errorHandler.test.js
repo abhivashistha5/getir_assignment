@@ -1,6 +1,7 @@
 import {
     describe, expect, it, jest,
 } from '@jest/globals';
+import { responseMessage } from '../../src/common/responseMessage';
 import { httpStatus, responseCode } from '../../src/common/statusCode';
 import errorHandler from '../../src/middleware/errorHandler';
 
@@ -73,7 +74,7 @@ describe('errorHandler', () => {
         expect(res.status).toBeCalledWith(httpStatus.INTERNAL_SERVER_ERROR);
         expect(jsonFn).toBeCalledWith({
             code: responseCode.SERVER_ERROR,
-            msg: 'Oops! Something went wrong.',
+            msg: responseMessage.SOMETHING_WENT_WRONG,
             records: [],
         });
     });
