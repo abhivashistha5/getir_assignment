@@ -1,6 +1,7 @@
 import {
     describe, it, expect, jest,
 } from '@jest/globals';
+import { responseMessage } from '../../src/common/responseMessage';
 import { httpStatus, responseCode } from '../../src/common/statusCode';
 import { errorBuilder, responseBuilder } from '../../src/lib/util';
 import unknownRoute from '../../src/middleware/unknownRoute';
@@ -15,7 +16,10 @@ describe('unknownRoute', () => {
 
         // Then
         expect(nextFn).toBeCalledWith(
-            errorBuilder(httpStatus.NOT_FOUND, responseBuilder(responseCode.NOT_FOUND, 'Api not found')),
+            errorBuilder(
+                httpStatus.NOT_FOUND,
+                responseBuilder(responseCode.NOT_FOUND, responseMessage.API_NOT_FOUND),
+            ),
         );
     });
 });

@@ -16,7 +16,7 @@ const getRecordList = async (
 ) => recordModel.aggregate([
     {
         $match: {
-            createdAt: { $gte: startDate, $lt: endDate },
+            createdAt: { $gte: startDate, $lte: endDate },
         },
     },
     {
@@ -37,7 +37,7 @@ const getRecordList = async (
     },
     {
         $match: {
-            totalCount: { $gte: minCount, $lt: maxCount },
+            totalCount: { $gte: minCount, $lte: maxCount },
         },
     },
 ]).exec();

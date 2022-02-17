@@ -96,7 +96,7 @@ describe('Record controller', () => {
 
             // Then
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
-            expect(response.body.msg).toBe('ValidationError: "startDate" must be a valid date');
+            expect(response.body.msg).toBe('ValidationError: "startDate" must be in YYYY-MM-DD format');
         });
 
         it('should return validation error on invalid end date', async () => {
@@ -113,7 +113,7 @@ describe('Record controller', () => {
 
             // Then
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
-            expect(response.body.msg).toBe('ValidationError: "endDate" must be a valid date');
+            expect(response.body.msg).toBe('ValidationError: "endDate" must be in YYYY-MM-DD format');
         });
 
         it('should return validation error on invalid minCount', async () => {
@@ -182,6 +182,40 @@ describe('Record controller', () => {
             // Then
             expect(response.status).toBe(httpStatus.BAD_REQUEST);
             expect(response.body.msg).toBe('ValidationError: "maxCount" must be a number');
+        });
+
+        it('should return validation error on invalid start date format', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '01-01-2015',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "startDate" must be in YYYY-MM-DD format');
+        });
+
+        it('should return validation error on invalid end date format', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2018-02-02',
+                endDate: '01-01-2015',
+                minCount: 100,
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "endDate" must be in YYYY-MM-DD format');
         });
     });
 });
