@@ -4,4 +4,5 @@ export const responseMessage = {
     DB_ERROR: 'Error in getting data from DB',
     SERVER_ERROR: 'Internal Server Error',
     SOMETHING_WENT_WRONG: 'Oops! Something went wrong.',
+    API_NOT_FOUND: 'Api not found',
 };

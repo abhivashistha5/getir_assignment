@@ -12,7 +12,8 @@
     "build": "babel -d ./dist ./src",
     "start": "node dist/server.js",
     "clean": "rm -rf dist",
-    "serve": "npm run clean && npm run build && node dist/server.js "
+    "serve": "npm run clean && npm run build && node dist/server.js",
+    "doc": "apidoc -c apidoc.json -i src -o apidoc"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "@babel/runtime": "7.17.2",
     "@jest/globals": "27.5.1",
     "@shelf/jest-mongodb": "2.2.0",
+    "apidoc": "0.50.4",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.3",
     "babel-runtime": "6.26.0",
