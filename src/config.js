@@ -12,4 +12,9 @@ export default {
     database: {
         connectionUri: process.env.MONGO_CONNECTION_URI,
     },
+    requestValidation: {
+        abortEarly: false, // check for all the errors
+        allowUnknown: true, // allow unknown props
+        stripUnknown: true, // remove unknown props
+    },
 };

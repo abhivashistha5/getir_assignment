@@ -1,4 +1,5 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import config from './config';
@@ -11,13 +12,17 @@ import recordRoute from './route/record/record.controller';
 const app = express();
 app.use(morgan(':date[iso] :method :url :status - :response-time ms'));
 
+// register middlewares
+app.use(bodyParser.urlencoded({ extended: false })); // application/x-www-form-urlencoded
+app.use(bodyParser.json()); // application/json
+
 // register routes
-app.use('/health', healthRoute);
-app.use('/record', recordRoute);
+app.use('/health', healthRoute); // server health api
+app.use('/record', recordRoute); // record api
 
 // register error handler middlewares
-app.use(unknownRoute);
-app.use(errorHandler);
+app.use(unknownRoute); // handle unknown api path
+app.use(errorHandler); // handle error thrown
 
 // connect to database
 mongoose.connect(

@@ -17,8 +17,8 @@ const getRecordList = async (
     minCount,
     maxCount,
 ) => {
-    const startOfDate = moment(startDate).startOf('day');
-    const endOfDate = moment(endDate).endOf('day');
+    const startOfDate = new Date(moment(startDate).startOf('day'));
+    const endOfDate = new Date(moment(endDate).endOf('day'));
 
     try {
         const records = await recordRepository
