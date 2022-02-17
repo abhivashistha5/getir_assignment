@@ -1,24 +1,15 @@
 # Getir Assigment
-<center> 
 
 ![Getir logo](https://getir.uk/_next/image/?url=https%3A%2F%2Flanding-strapi-images-development.s3.eu-west-1.amazonaws.com%2Fgetir_groceries_34ddbc9659.svg&w=3840&q=75) 
 
-</center>
-
-<center>
 
 ![nodejs](https://img.shields.io/badge/nodejs-%3E%3D16.14.0-brightgreen)
 ![npm](https://img.shields.io/badge/npm-8.3.1-blue)
 
 
-</center>
-
-
-
-
 Getir Backend Challange
 
-It uses airbnb code style for linitng and `jest` for test runner.
+It uses airbnb code style and `jest` for test runner.
 
 # Build
 For creating a clean build run
@@ -63,7 +54,7 @@ It contains all the api endpoints in seperate modules.<br>
 
 #### `src/route/<moduleName>/<moduleName>.controller.js`
 
-It is the API controller file. It defines the  router middlewares and validations.
+It is the API controller file. It applies router middlewares and api validation.
 
 #### `src/route/<moduleName>/<moduleName>.validation.js`
 
@@ -75,7 +66,7 @@ It contains the module business logic.
 
 #### `src/route/<moduleName>/<modelName>.repository.js`
 
-It contains logic for the data interactions.
+It contains logic for the data source interactions.
 
 #### `src/route/<moduleName>/<modelName>.model.js`
 
@@ -107,7 +98,7 @@ All the middlewares that can be used are defined here.
 
 ## `test`
 
-It contains the test cases in the similar directory structure as `src`
+It contains the test cases in similar directory structure as `src`
 
 ## `apidoc`
 
