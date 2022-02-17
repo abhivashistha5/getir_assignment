@@ -1,11 +1,10 @@
 import { describe, expect, it } from '@jest/globals';
 import supertest from 'supertest';
-import express from 'express';
 import healthRoute from '../../../src/route/health/health.controller';
 import { httpStatus } from '../../../src/common/statusCode';
+import mockServer from '../__mock__/mockServer';
 
-const app = express();
-app.use('/', healthRoute);
+const app = mockServer(healthRoute);
 
 describe('Health controller', () => {
     describe('GET ping', () => {

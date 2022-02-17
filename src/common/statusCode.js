@@ -61,4 +61,5 @@ export const responseCode = {
     SERVER_ERROR: 1,
     NOT_FOUND: 2,
     DB_ERROR: 3,
+    BAD_REQUEST: 4,
 };

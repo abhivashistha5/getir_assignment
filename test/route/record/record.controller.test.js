@@ -3,7 +3,7 @@ import {
     describe, expect, it, jest,
 } from '@jest/globals';
 import supertest from 'supertest';
-import express from 'express';
+import mockServer from '../__mock__/mockServer';
 import recordRoute from '../../../src/route/record/record.controller';
 import { responseBuilder } from '../../../src/lib/util';
 import { httpStatus, responseCode } from '../../../src/common/statusCode';
@@ -11,8 +11,7 @@ import recordService from '../../../src/route/record/record.service';
 import { responseMessage } from '../../../src/common/responseMessage';
 import { DB_ERROR } from '../../../src/common/error';
 
-const app = express();
-app.use('/', recordRoute);
+const app = mockServer(recordRoute);
 
 // mock service
 jest.mock('../../../src/route/record/record.service');
@@ -35,9 +34,15 @@ describe('Record controller', () => {
             recordService.getRecordList = jest.fn().mockResolvedValue(data);
 
             // When
-            const response = await supertest(app).post('/records').expect(httpStatus.OK);
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 3000,
+            });
 
             // Then
+            expect(response.status).toBe(httpStatus.OK);
             expect(response.body).toEqual(
                 responseBuilder(responseCode.SUCCESS, responseMessage.SUCCESS, data),
             );
@@ -48,10 +53,16 @@ describe('Record controller', () => {
             recordService.getRecordList = jest.fn().mockRejectedValue(new DB_ERROR());
 
             // When
-            const response = await supertest(app).post('/records').send();
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 3000,
+            });
 
             // Then
             expect(response.status).toBe(httpStatus.INTERNAL_SERVER_ERROR);
+            expect(response.body.msg).toBe(responseMessage.DB_ERROR);
         });
 
         it('should return INTERNAL_SERVER_ERROR error', async () => {
@@ -59,10 +70,118 @@ describe('Record controller', () => {
             recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
 
             // When
-            const response = await supertest(app).post('/records').send();
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 3000,
+            });
 
             // Then
             expect(response.status).toBe(httpStatus.INTERNAL_SERVER_ERROR);
+            expect(response.body.msg).toBe(responseMessage.SERVER_ERROR);
+        });
+
+        it('should return validation error on invalid start date', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26aaaa',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "startDate" must be a valid date');
+        });
+
+        it('should return validation error on invalid end date', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02aaa',
+                minCount: 100,
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "endDate" must be a valid date');
+        });
+
+        it('should return validation error on invalid minCount', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: -1,
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "minCount" must be greater than or equal to 0');
+        });
+
+        it('should return validation error on non numeric minCount', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 'abc',
+                maxCount: 3000,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "minCount" must be a number');
+        });
+
+        it('should return validation error on invalid maxCount', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: -1,
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "maxCount" must be greater than or equal to 0');
+        });
+
+        it('should return validation error on non numeric maxCount', async () => {
+            // Given
+            recordService.getRecordList = jest.fn().mockRejectedValue(new Error('some error'));
+
+            // When
+            const response = await supertest(app).post('/records').send({
+                startDate: '2015-01-26',
+                endDate: '2018-02-02',
+                minCount: 100,
+                maxCount: 'abc',
+            });
+
+            // Then
+            expect(response.status).toBe(httpStatus.BAD_REQUEST);
+            expect(response.body.msg).toBe('ValidationError: "maxCount" must be a number');
         });
     });
 });
